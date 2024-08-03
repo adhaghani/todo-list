@@ -1,0 +1,138 @@
+.Todo {
+  padding-top: calc(var(--nav-height) + 20px) !important;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: var(--gap_m);
+  .Todo-Section {
+    .Title {
+      font-size: var(--font_size_l);
+      padding: var(--padding_m) 09px;
+      margin-bottom: var(--mg_m);
+      border-radius: 6px;
+    }
+    .Todo_Container_Card {
+      .Task_Columns {
+        min-height: 150px;
+        border-radius: 6px;
+        transition: 0.2s all ease-in;
+        padding: var(--padding_m);
+        &.Drag {
+          background-color: #e9e9e9;
+        }
+      }
+      .Todo__Card {
+        background-color: var(--bg_colour_absolutewhite);
+        border: 1px solid var(--bg_colour_lgray);
+        margin-bottom: var(--mg_s);
+        padding: var(--padding_m);
+        border-radius: 6px;
+        .Todo_Title {
+          font-size: var(--font_size_m);
+          padding-right: 30px;
+          color: var(--text_colour_black);
+        }
+        .Details {
+          .Todo_priority {
+            width: fit-content;
+            font-size: var(--font_size_xs);
+            background-color: rgba(0, 140, 255, 0.247);
+            margin: var(--mg_s) 0px;
+            padding: 5px 10px;
+            font-weight: 600;
+            border-radius: 6px;
+            &.High {
+              background-color: rgba(255, 0, 0, 0.247);
+            }
+            &.Medium {
+              background-color: rgba(255, 251, 0, 0.247);
+            }
+          }
+          .Todo_Details {
+            font-size: var(--font_size_s);
+            color: var(--text_colour_dkgray);
+          }
+        }
+      }
+    }
+  }
+}
+
+.Add_Task {
+  background-color: #1a1a1a54;
+  backdrop-filter: blur(12px);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  .Add-Task_Container {
+    background-color: var(--bg_colour_white);
+    padding: var(--padding_l);
+    border-radius: var(--border_rad10);
+    width: clamp(200px, 100%, 600px);
+    .Delete {
+      height: fit-content;
+      justify-content: space-between;
+      align-items: center;
+      svg {
+        width: 30px;
+        height: 30px;
+      }
+    }
+    .Input_Container {
+      display: flex;
+      flex-direction: column;
+      margin: calc(var(--mg_l) * 1.5) 0px;
+      label {
+        font-size: var(--font_size_s);
+        position: absolute;
+        transform: translate(10px, -13px);
+        background-color: var(--bg_colour_absolutewhite);
+        padding: 2px 5px;
+      }
+      input,
+      select {
+        border: 1px solid var(--bg_colour_lgray);
+        padding: var(--padding_m) var(--padding_s);
+        font-size: var(--font_size_s);
+        border-radius: 6px;
+        &:hover,
+        &:focus,
+        &:active {
+          border: 1px solid var(--bg_colour_dkgray);
+        }
+      }
+      input[type="submit"] {
+        border: none;
+        background-color: var(--bg_colour_black);
+        color: var(--text_colour_white);
+        font-weight: 600;
+        font-size: var(--font_size_m);
+        cursor: pointer;
+      }
+    }
+  }
+}
+.Delete {
+  display: flex;
+  justify-content: flex-end;
+  height: 0px;
+  svg {
+    padding: 1px;
+    cursor: pointer;
+    path {
+      pointer-events: none;
+    }
+    &:hover {
+      path {
+        stroke: var(--bg_colour_black);
+      }
+    }
+  }
+}
+@media screen and (max-width: 768px) {
+  .Todo {
+    grid-template-columns: 1fr;
+  }
+}

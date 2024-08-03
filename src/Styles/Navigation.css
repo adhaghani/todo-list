@@ -1,0 +1,27 @@
+.Navigation {
+  width: 100%;
+  position: fixed;
+  background-color: var(--bg_colour_white);
+}
+.Navigation .Nav {
+  height: var(--nav-height);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.Navigation .Nav .Logo h1 {
+  font-size: var(--font_size_m);
+}
+.Navigation .Nav .action {
+  display: flex;
+  gap: var(--gap_l);
+}
+.Navigation .Nav .action li {
+  background-color: var(--bg_colour_black);
+  color: var(--text_colour_white);
+  padding: var(--padding_btn_s);
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: var(--font_size_s);
+  cursor: pointer;
+}/*# sourceMappingURL=Navigation.css.map */

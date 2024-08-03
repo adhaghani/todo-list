@@ -1,0 +1,86 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+
+* {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: none;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  list-style: none;
+  text-decoration: none;
+}
+
+:root {
+  --bg_colour_absolutewhite: #fff;
+  --bg_colour_white: #fbfbfb;
+  --bg_colour_black: #1a1a1a;
+  --bg_colour_dkgray: #252525;
+  --bg_colour_lgray: #cecece;
+  --text_colour_white: #fbfbfb;
+  --text_colour_black: #1a1a1a;
+  --text_colour_dkgray: #3a3a3a;
+  --text_colour_lgray: #7a7a7a;
+  --nav-height: 60px;
+  --width_container: clamp(300px, 100%, 1440px);
+  --padding_l: 20px;
+  --padding_m: 15px;
+  --padding_s: 10px;
+  --padding_btn_s: 10px 20px;
+  --padding_btn_m: 15px 30px;
+  --gap_l: 20px;
+  --gap_m: 15px;
+  --gap_s: 10px;
+  --mg_side_auto: 0px auto;
+  --mg_auto: auto;
+  --mg_l: 20px;
+  --mg_m: 15px;
+  --mg_s: 10px;
+  --mg_xs: 5px;
+  --font_size_xl: clamp(2.6rem, 5vw, 5rem);
+  --font_size_l: clamp(1.5rem, 3vw, 1.8rem);
+  --font_size_m: clamp(1.1rem, 2vw, 1.3rem);
+  --font_size_s: clamp(0.95rem, 1.5vw, 1rem);
+  --font_size_xs: clamp(0.6rem, 1vw, 0.8rem);
+  --border_rad10: 10px;
+  --transition_f: 0.1s;
+  --transition_mf: 0.2s;
+}
+
+body {
+  background-color: var(--bg_colour_white);
+}
+
+.Container {
+  width: var(--width_container);
+  margin: var(--mg_auto);
+  padding: var(--padding_l);
+}
+
+/*** Works on common browsers ***/
+::-moz-selection {
+  background-color: transparent;
+}
+::selection {
+  background-color: transparent;
+}
+
+/*** Mozilla based browsers ***/
+::-moz-selection {
+  background-color: transparent;
+}
+
+/***For Other Browsers ***/
+::-o-selection {
+  background-color: transparent;
+}
+
+::-ms-selection {
+  background-color: transparent;
+}
+
+/*** For Webkit ***/
+::-webkit-selection {
+  background-color: transparent;
+}
