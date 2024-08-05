@@ -1,7 +1,9 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 
 import Delete from "../assets/Delete";
 const Add_Task = (props) => {
+  const [IsEmpty, setIsEmpty] = useState(false);
+
   const titleref = useRef();
   const detailsref = useRef();
   const priorityref = useRef();
@@ -11,7 +13,13 @@ const Add_Task = (props) => {
     const title = titleref.current.value;
     const details = detailsref.current.value;
     const priority = priorityref.current.value;
-    props.addTodo(title, priority, details);
+    if (!title || !priority) {
+      setIsEmpty(true);
+      return;
+    } else {
+      setIsEmpty(false);
+      props.addTodo(title, priority, details);
+    }
   };
 
   return (
@@ -21,9 +29,11 @@ const Add_Task = (props) => {
           <h2>Add New Task</h2>
           <Delete />
         </div>
+        <p className="Error-text">{IsEmpty && "* fields must be filled."} </p>
         <div className="Input_Container">
-          <label htmlFor="">Task Name</label>
+          <label htmlFor="">* Task Name</label>
           <input
+            className={IsEmpty ? "Error" : ""}
             type="text"
             ref={titleref}
             id="title"
@@ -41,9 +51,16 @@ const Add_Task = (props) => {
             required
           />
         </div>
+
         <div className="Input_Container">
-          <label htmlFor="">Task Priority</label>
-          <select required ref={priorityref} name="priority" id="priority">
+          <label htmlFor="">* Task Priority</label>
+          <select
+            className={IsEmpty ? "Error" : ""}
+            required
+            ref={priorityref}
+            name="priority"
+            id="priority"
+          >
             <option value="High">High</option>
             <option value="Medium">Medium</option>
             <option value="Low">Low</option>

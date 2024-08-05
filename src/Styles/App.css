@@ -11,7 +11,7 @@
   border-radius: 6px;
 }
 .Todo .Todo-Section .Todo_Container_Card .Task_Columns {
-  min-height: 150px;
+  min-height: 50px;
   border-radius: 6px;
   transition: 0.2s all ease-in;
   padding: var(--padding_m);
@@ -50,6 +50,9 @@
 .Todo .Todo-Section .Todo_Container_Card .Todo__Card .Details .Todo_Details {
   font-size: var(--font_size_s);
   color: var(--text_colour_dkgray);
+}
+.Todo .Todo-Section .Todo_Container_Card .Todo__Card .Details .Todo__Button {
+  padding: var(--padding_btn_s);
 }
 
 .Add_Task {
@@ -133,4 +136,11 @@
   .Todo {
     grid-template-columns: 1fr;
   }
+}
+.Error-text {
+  color: rgb(255, 0, 0);
+}
+
+.Error {
+  border: 1px solid rgb(255, 0, 0) !important;
 }/*# sourceMappingURL=App.css.map */

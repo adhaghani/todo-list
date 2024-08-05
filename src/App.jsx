@@ -6,14 +6,33 @@ import Task_Column from "./Component/Task_Column";
 
 import Add_Task from "./Component/Add_Task";
 
-import { DragDropContext } from "react-beautiful-dnd";
 function App() {
   const [tasks, setTasks] = useState(() => {
     const storedTasks = localStorage.getItem("tasks");
     return storedTasks ? JSON.parse(storedTasks) : [];
   });
+
+  const separateTasks = () => {
+    const todoTasks = tasks.filter((task) => task.status === "todo");
+    const inProgressTasks = tasks.filter(
+      (task) => task.status === "inprogress"
+    );
+    const completedTasks = tasks.filter((task) => task.status === "done");
+
+    setTodoTask(todoTasks);
+    setInprogressTask(inProgressTasks);
+    setCompletedTask(completedTasks);
+  };
+
+  useEffect(() => {
+    separateTasks();
+  }, [tasks]);
+
+  const [TodoTask, setTodoTask] = useState([]);
+  const [InprogressTask, setInprogressTask] = useState([]);
+  const [CompletedTask, setCompletedTask] = useState([]);
+
   const [AddTask, setAddTask] = useState(false);
-  const [IsDragging, setIsDragging] = useState(false);
 
   useEffect(() => {
     document.body.style.overflow = AddTask ? "hidden" : "visible";
@@ -79,74 +98,33 @@ function App() {
     [tasks]
   );
 
-  const onDragEnd = useCallback(
-    async (result) => {
-      if (!result.destination) {
-        endDrag();
-        return;
-      }
-      endDrag();
-      const { source, destination, draggableId } = result;
-      const dropID = destination.droppableId;
-
-      updateTaskStatus(draggableId, dropID);
-      const item = Array.from(tasks);
-      console.log(item);
-      console.table(result);
-
-      
-
-      // const reorderedTasks = updatedTasks.filter(
-      //   (task) => task.id !== draggableId
-      // );
-      // const [reorderedItem] = reorderedTasks.splice(source.index, 1);
-      // reorderedTasks.splice(destination.index, 0, reorderedItem);
-
-      // setTasks(reorderedTasks);
-    },
-    [updateTaskStatus, tasks]
-  );
-
-  const startDrag = () => {
-    setIsDragging(true);
-  };
-
-  const endDrag = () => {
-    setIsDragging(false);
-  };
-
   return (
     <div className="App">
       <Navigation HandleAddTask={HandleAddTask} />
       {AddTask && <Add_Task addTodo={addTodo} handleAddTask={HandleAddTask} />}
 
       <div className="Container Todo">
-        <DragDropContext onDragEnd={onDragEnd} onDragStart={startDrag}>
-          <Task_Column
-            type="To do"
-            ColumnID={1}
-            tasks={tasks.filter((task) => task.status === "todo")}
-            deleteTask={deleteTask}
-            updateTaskStatus={updateTaskStatus}
-            Drag={IsDragging}
-          />
-          <Task_Column
-            type="In Progress"
-            ColumnID={2}
-            tasks={tasks.filter((task) => task.status === "inprogress")}
-            deleteTask={deleteTask}
-            updateTaskStatus={updateTaskStatus}
-            Drag={IsDragging}
-          />
-          <Task_Column
-            type="Completed"
-            ColumnID={3}
-            tasks={tasks.filter((task) => task.status === "done")}
-            deleteTask={deleteTask}
-            updateTaskStatus={updateTaskStatus}
-            Drag={IsDragging}
-          />
-        </DragDropContext>
+        <Task_Column
+          type="Task"
+          ColumnID={1}
+          tasks={TodoTask}
+          deleteTask={deleteTask}
+          updateTaskStatus={updateTaskStatus}
+        />
+        <Task_Column
+          type="In Progress"
+          ColumnID={2}
+          tasks={InprogressTask}
+          deleteTask={deleteTask}
+          updateTaskStatus={updateTaskStatus}
+        />
+        <Task_Column
+          type="Completed"
+          ColumnID={3}
+          tasks={CompletedTask}
+          deleteTask={deleteTask}
+          updateTaskStatus={updateTaskStatus}
+        />
       </div>
     </div>
   );

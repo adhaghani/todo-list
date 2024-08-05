@@ -24,54 +24,38 @@ const Task_Column = ({
     <div className="Todo-Section">
       <h2 className="Title">{type}</h2>
       <div className="Todo_Container_Card">
-        <Droppable droppableId={ColumnID.toString()}>
-          {(provided) => (
-            <ul
-              className={Drag ? "Task_Columns Drag" : "Task_Columns"}
-              {...provided.droppableProps}
-              ref={provided.innerRef}
-            >
-              {tasks.map(({ id, title, priority, details }, index) => (
-                <Draggable key={id} draggableId={id} index={index}>
-                  {(provided) => (
-                    <li
-                      className="Todo__Card"
-                      key={id}
-                      {...provided.draggableProps}
-                      {...provided.dragHandleProps}
-                      ref={provided.innerRef}
-                    >
-                      <div className="Delete" onClick={() => onDeleteClick(id)}>
-                        <Delete />
-                      </div>
-                      <h3 className="Todo_Title">{title}</h3>
-                      <div className="Details">
-                        <p
-                          className={
-                            priority === "High"
-                              ? "Todo_priority High"
-                              : priority === "Medium"
-                              ? "Todo_priority Medium"
-                              : "Todo_priority"
-                          }
-                        >
-                          {priority} Priority
-                        </p>
-                        <p className="Todo_Details">{details}</p>
-                        {ColumnID !== 3 && (
-                          <button onClick={() => updateTask(id, ColumnID)}>
-                            {ColumnID === 1 ? "Doing" : "Done"}
-                          </button>
-                        )}
-                      </div>
-                    </li>
-                  )}
-                </Draggable>
-              ))}
-              {provided.placeholder}
-            </ul>
-          )}
-        </Droppable>
+        <ul className={Drag ? "Task_Columns Drag" : "Task_Columns"}>
+          {tasks.map(({ id, title, priority, details }, index) => (
+            <li className="Todo__Card" key={id}>
+              <div className="Delete" onClick={() => onDeleteClick(id)}>
+                <Delete />
+              </div>
+              <h3 className="Todo_Title">{title}</h3>
+              <div className="Details">
+                <p
+                  className={
+                    priority === "High"
+                      ? "Todo_priority High"
+                      : priority === "Medium"
+                      ? "Todo_priority Medium"
+                      : "Todo_priority"
+                  }
+                >
+                  {priority} Priority
+                </p>
+                <p className="Todo_Details">{details}</p>
+                {ColumnID !== 3 && (
+                  <button
+                    className="Todo__Button"
+                    onClick={() => updateTask(id, ColumnID)}
+                  >
+                    {ColumnID === 1 ? "Start Doing" : "Done"}
+                  </button>
+                )}
+              </div>
+            </li>
+          ))}{" "}
+        </ul>
       </div>
     </div>
   );
